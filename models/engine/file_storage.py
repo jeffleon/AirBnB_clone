@@ -41,6 +41,13 @@ class FileStorage:
         """reload: method that deserialize the JSON file to __objects
         """
         from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+
         dictionary = None
         try:
             with open(self.__file_path, mode="r", encoding="utf-8") as r_file:
@@ -49,4 +56,19 @@ class FileStorage:
             pass
         if dictionary is not None:
             for key, value in dictionary.items():
-                self.__objects[key] = BaseModel(**value)
+                obj = None
+                if "BaseModel" in key:
+                    obj = BaseModel(**value)
+                elif "User" in key:
+                    obj = User(**value)
+                elif "Place" in key:
+                    obj = Place(**value)
+                elif "State" in key:
+                    obj = State(**value)
+                elif "Amenity" in key:
+                    obj = Amenity(**value)
+                elif "Review" in key:
+                    obj = Review(**value)
+                elif "City" in key:
+                    obj = City(**value)
+                self.__objects[key] = obj
