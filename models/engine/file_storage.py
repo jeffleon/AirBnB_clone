@@ -24,7 +24,7 @@ class FileStorage:
         """
         key = obj.__class__.__name__ + "." + obj.id
         self.__objects[key] = obj
-        
+
     def save(self):
         """save: method that serialize __objects to the JSON file
         """
