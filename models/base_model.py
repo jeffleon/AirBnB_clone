@@ -20,14 +20,13 @@ class BaseModel:
                 if key in dates:
                     date = datetime.datetime.strptime(value, date_format)
                     setattr(self, key, date)
-                elif key is not "__class__":
+                elif '__class__' not in key:
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
             storage.new(self)
-#            storage.new(self.to_dict())
 
     def __str__(self):
         """__str__: method that converts the object in a string
