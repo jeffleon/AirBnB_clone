@@ -11,6 +11,8 @@ import json
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand"""
     prompt = '(hbnb) '
+    list_class = ['BaseModel', 'User', 'City', 'Place', 'Amenity', 'State',
+                  'Review']
 
     def do_EOF(self, arg):
         """method that exit if find EOF
@@ -30,6 +32,9 @@ class HBNBCommand(cmd.Cmd):
                 nuevo = BaseModel()
                 nuevo.save()
                 print(nuevo.id)
+            elif arg == 'User':
+                nuevo = User()
+                nuevo.save()
             else:
                 print('** class doesn\'t exist **')
         else:
@@ -40,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
         """
         new_list = args.split()
         if args and len(new_list) == 2:
-            if new_list[0] == 'BaseModel':
+            if new_list[0] == 'BaseModel' or new_list[0] == 'User':
                 i = False
                 objects = storage.all()
                 for key in objects.keys():
