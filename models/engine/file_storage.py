@@ -22,28 +22,31 @@ class FileStorage:
     def new(self, obj):
         """new: method that sets in __objects the obj with the key obj_class_name.id
         """
-        new_dict = dict(obj.__dict__)
-        new_dict['created_at'] = new_dict.get('created_at').isoformat()
-        new_dict['updated_at'] = new_dict.get('updated_at').isoformat()
         key = obj.__class__.__name__ + "." + obj.id
-        self.__objects[key] = new_dict
-#        key = obj['__class__'] + "." + obj['id']
-#        self.__objects[key] = obj
+        self.__objects[key] = obj
 
     def save(self):
         """save: method that serialize __objects to the JSON file
         """
+        dictionary = dict()
+        for key, value in self.__objects.items():
+            dictionary[key] = value.to_dict()
         try:
             with open(self.__file_path, mode="w", encoding="utf-8") as s_file:
-                json.dump(self.__objects, s_file)
+                json.dump(dictionary, s_file)
         except:
             pass
 
     def reload(self):
         """reload: method that deserialize the JSON file to __objects
         """
+        from models.base_model import BaseModel
+        dictionary = None
         try:
             with open(self.__file_path, mode="r", encoding="utf-8") as r_file:
-                self.__objects = json.load(r_file)
+                dictionary = json.load(r_file)
         except:
             pass
+        if dictionary is not None:
+            for key, value in dictionary.items():
+                self.__objects[key] = BaseModel(**value)

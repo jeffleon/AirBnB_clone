@@ -13,6 +13,7 @@ class BaseModel:
     """
     def __init__(self, *args, **kwargs):
         """__init__: method that initialize an object"""
+
         dates = ['created_at', 'updated_at']
         date_format = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
@@ -20,14 +21,13 @@ class BaseModel:
                 if key in dates:
                     date = datetime.datetime.strptime(value, date_format)
                     setattr(self, key, date)
-                elif key is not "__class__":
+                elif '__class__' not in key:
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
             storage.new(self)
-#            storage.new(self.to_dict())
 
     def __str__(self):
         """__str__: method that converts the object in a string
