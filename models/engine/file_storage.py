@@ -5,6 +5,7 @@ Module for FileStorage Class
 import json
 from models.base_model import BaseModel
 
+
 class FileStorage:
     """
     FileStorage Class
@@ -40,12 +41,12 @@ class FileStorage:
     def reload(self):
         """reload: method that deserialize the JSON file to __objects
         """
-        dictionary = dict() 
+        dictionary = None
         try:
             with open(self.__file_path, mode="r", encoding="utf-8") as r_file:
                 dictionary = json.load(r_file)
         except:
             pass
-        if dictionary != {}:
+        if dictionary is not None:
             for key, value in dictionary.items():
                 self.__objects[key] = BaseModel(**value)
