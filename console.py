@@ -7,9 +7,11 @@ from models.base_model import BaseModel
 from models import storage
 import json
 
+
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand"""
     prompt = '(hbnb) '
+
     def do_EOF(self, arg):
         """method that exit if find EOF
         """
@@ -21,7 +23,7 @@ class HBNBCommand(cmd.Cmd):
         exit()
 
     def do_create(self, arg):
-        """method that create a new Object 
+        """method that create a new Object
         """
         if arg:
             if arg == 'BaseModel':
@@ -32,8 +34,9 @@ class HBNBCommand(cmd.Cmd):
                 print('** class doesn\'t exist **')
         else:
             print('** class name missing **')
+
     def do_destroy(self, args):
-        """method that destroy an Object
+        """method that deletes an Object
         """
         new_list = args.split()
         if args and len(new_list) == 2:
@@ -45,11 +48,10 @@ class HBNBCommand(cmd.Cmd):
                         del objects[key]
                         i = True
                         break
-                if i == False:
+                if i is not True:
                     print('** no instance found **')
                 else:
-                    with open('file.json', mode='w', encoding='utf-8') as s_file:
-                        json.dump(objects, s_file)
+                    storage.save()
             else:
                 print('** class doesn\'t exist **')
         elif args and len(new_list) == 1:
@@ -58,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
 
     def do_show(self, args):
-        """method that show an Object
+        """method that prints the Object
         """
         new_list = args.split()
         if args and len(new_list) == 2:
@@ -67,9 +69,9 @@ class HBNBCommand(cmd.Cmd):
                 for key, value in storage.all().items():
                     if key == new_list[0] + '.' + new_list[1]:
                         i = True
-                        print(BaseModel(**value))
+                        print(value)
                         break
-                if i == False:
+                if i is not True:
                     print('** no instance found **')
             else:
                 print('** class doesn\'t exist **')
@@ -77,22 +79,27 @@ class HBNBCommand(cmd.Cmd):
             print('** instance id missing **')
         elif len(new_list) < 1:
             print('** class name missing **')
-        
+
     def do_all(self, args):
         """method that print all Objects
         """
-        new_list = args.split()
-        G_dic = list()
-        if args and len(new_list) == 1:
-            if new_list[0] == 'BaseModel':
-                new_var = dict(storage.all())
-                for value in new_var.values():
-                    G_dic.append(str(BaseModel(**value)))
-                print(G_dic)
-            else:
-                print('** class doesn\'t exist **')
-    
+        if args:
+            new_list = args.split()
+            G_dic = list()
+            if args and len(new_list) == 1:
+                if new_list[0] == 'BaseModel':
+                    new_var = dict(storage.all())
+                    for value in new_var.values():
+                        G_dic.append(str(value))
+                    print(G_dic)
+                else:
+                    print('** class doesn\'t exist **')
+        else:
+            print('** class name missing **')
+
     def do_update(self, args):
+        """method that updates the specified object
+        """
         atribute = ""
         new_list = args.split()
         if len(new_list) > 4:
@@ -102,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
                     atribute = ' '.join(new_list[3:])
                     new_list = new_list[:4]
                     new_list[3] = atribute.replace("\"", "")
-        if args: 
+        if args:
             if new_list[0] == 'BaseModel':
                 if len(new_list) >= 2:
                     i = False
@@ -110,9 +117,9 @@ class HBNBCommand(cmd.Cmd):
                     for key, value in storage.all().items():
                         if key == new_list[0] + '.' + new_list[1]:
                             i = True
-                            modificar = BaseModel(**value)
+                            modificar = value
                             break
-                    if i == False:
+                    if i is not True:
                         print('** no instance found **')
                     elif len(new_list) == 2:
                         print('** attribute name missing **')
@@ -123,21 +130,27 @@ class HBNBCommand(cmd.Cmd):
                             new_list[3] = int(new_list[3])
                         elif '.' in new_list[3]:
                             try:
-                                new_list[3]= float(new_list[3])
+                                new_list[3] = float(new_list[3])
                             except:
                                 pass
                         setattr(modificar, new_list[2], new_list[3])
-                        storage.new(modificar.to_dict())
-                        storage.save()
+                        modificar.save()
                 elif args and len(new_list) == 1:
                     print('** instance id missing **')
             else:
                 print('** class doesn\'t exist **')
         else:
             print('** class name missing **')
+
     def default(self, arg):
-        """method that print all Objects
+        """method that prints a message in case a wrong command is entered
         """
         print('command not found')
+
+    def emptyline(self):
+        """redefine method that does nothing when empty line is entered
+        """
+        pass
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
