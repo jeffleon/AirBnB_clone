@@ -102,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
         """
         atribute = ""
         new_list = args.split()
-        if len(new_list) > 4:
+        if len(new_list) >= 4:
             index = args.find("\"")
             if index != -1:
                 if args.find("\"", index + 1) != -1:

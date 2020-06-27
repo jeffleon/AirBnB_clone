@@ -3,7 +3,6 @@
 Module for FileStorage Class
 """
 import json
-from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -41,6 +40,7 @@ class FileStorage:
     def reload(self):
         """reload: method that deserialize the JSON file to __objects
         """
+        from models.base_model import BaseModel
         dictionary = None
         try:
             with open(self.__file_path, mode="r", encoding="utf-8") as r_file:
