@@ -12,7 +12,7 @@ from models.amenity import Amenity
 from models.review import Review
 from models import storage
 import json
-
+import re
 
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand"""
@@ -155,10 +155,52 @@ class HBNBCommand(cmd.Cmd):
         else:
             print('** class name missing **')
 
+    def all(self, args):
+        """method that print all Objects
+        """
+        G_dic = list()
+        new_var = dict(storage.all())
+        for value in new_var.values():
+            if args == value.__class__.__name__:
+                G_dic.append(str(value))
+        print(str(G_dic).replace('\"',''))
+
+    def count(self, args):
+        """count instances
+        """
+        print('in in count')
+
+    def destroy(self, args):
+        print('in in destroy')
+
+    def show(self, args):
+        print('in in show')
+
+    def update(self, args):
+        print('in in update')
+
+
     def default(self, arg):
         """method that prints a message in case a wrong command is entered
         """
-        print('command not found')
+        dic_methods = {"all": self.all, "destroy": self.destroy,
+                       "show": self.show, "count": self.count,
+                       "update": self.update}
+        list_patterns = ['(.+)\.all\(\)$', '(.+)\.count\(\)$', '(.+)\.show\(\)$']
+        state = False
+        if len(arg.split()) == 1:
+            for pa_match in list_patterns:
+                if re.compile(pa_match).match(arg) is not None:
+                    print('pass the Pattern')
+                    new_list = arg.split('.')
+                    method = new_list[1].replace('(','').replace(')','')
+                    if new_list[0] in self.dic_class.keys():
+                        if method in dic_methods.keys():
+                            dic_methods[method]('{}'.format(new_list[0]))
+                            state = True
+                    break
+        if state is False:
+            print('command not found')
 
     def emptyline(self):
         """redefine method that does nothing when empty line is entered
