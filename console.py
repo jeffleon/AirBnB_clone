@@ -4,6 +4,12 @@ Module for Console Class
 """
 import cmd
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 from models import storage
 import json
 
@@ -11,8 +17,9 @@ import json
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand"""
     prompt = '(hbnb) '
-    list_class = ['BaseModel', 'User', 'City', 'Place', 'Amenity', 'State',
-                  'Review']
+    dic_class = {'BaseModel': BaseModel, 'User': User, 'City': City,
+                 'Place': Place, 'Amenity': Amenity, 'State': State,
+                 'Review': Review}
 
     def do_EOF(self, arg):
         """method that exit if find EOF
@@ -27,16 +34,16 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         """method that create a new Object
         """
+        nuevo = None
         if arg:
-            if arg == 'BaseModel':
-                nuevo = BaseModel()
-                nuevo.save()
-                print(nuevo.id)
-            elif arg == 'User':
-                nuevo = User()
-                nuevo.save()
-            else:
-                print('** class doesn\'t exist **')
+            new_list = arg.split()
+            if len(new_list) == 1:
+                if arg in self.dic_class.keys():
+                    nuevo = self.dic_class[arg]()
+                    nuevo.save()
+                    print(nuevo.id)
+                else:
+                    print('** class doesn\'t exist **')
         else:
             print('** class name missing **')
 
@@ -45,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
         """
         new_list = args.split()
         if args and len(new_list) == 2:
-            if new_list[0] == 'BaseModel' or new_list[0] == 'User':
+            if new_list[0] in self.dic_class.keys():
                 i = False
                 objects = storage.all()
                 for key in objects.keys():
@@ -69,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
         """
         new_list = args.split()
         if args and len(new_list) == 2:
-            if new_list[0] == 'BaseModel':
+            if new_list[0] in self.dic_class.keys():
                 i = False
                 for key, value in storage.all().items():
                     if key == new_list[0] + '.' + new_list[1]:
@@ -92,10 +99,11 @@ class HBNBCommand(cmd.Cmd):
             new_list = args.split()
             G_dic = list()
             if args and len(new_list) == 1:
-                if new_list[0] == 'BaseModel':
+                if new_list[0] in self.dic_class.keys():
                     new_var = dict(storage.all())
                     for value in new_var.values():
-                        G_dic.append(str(value))
+                        if new_list[0] == value.__class__.__name__:
+                            G_dic.append(str(value))
                     print(G_dic)
                 else:
                     print('** class doesn\'t exist **')
@@ -115,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
                     new_list = new_list[:4]
                     new_list[3] = atribute.replace("\"", "")
         if args:
-            if new_list[0] == 'BaseModel':
+            if new_list[0] in self.dic_class.keys():
                 if len(new_list) >= 2:
                     i = False
                     modificar = None
