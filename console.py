@@ -14,6 +14,7 @@ from models import storage
 import json
 import shlex
 import re
+import os
 
 
 class HBNBCommand(cmd.Cmd):
@@ -26,6 +27,7 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """method that exit if find EOF
         """
+        print("")
         exit()
 
     def do_quit(self, arg):
@@ -240,5 +242,11 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
+#    def precmd(self, line):
+#        os.isatty()
+#
+#    def postcmd(self, stop, line):
+#        pass
+#
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
