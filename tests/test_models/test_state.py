@@ -5,6 +5,8 @@ import pep8
 import json
 from models import state
 from models.state import State
+import datetime
+import re
 
 
 class TestState(unittest.TestCase):
@@ -32,12 +34,13 @@ class TestState(unittest.TestCase):
         self.assertEqual(type(state_obj.id), str)
         self.assertEqual(type(state_obj.created_at), datetime.datetime)
         self.assertEqual(type(state_obj.updated_at), datetime.datetime)
-        pattern = '[0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*'
-        pattern_t = '[0-9]*-[0-9]*-[0-9]*T[0-9]*:[0-9]*:[0-9]*.[0-9]*'
-        datetime_patt = 'datetime.datetime(' + pattern_t + ')'
+        pattern = '[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*'
+        datetime_patt = '[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*.[0-9]*'
         self.assertIsNotNone(re.match(pattern, state_obj.id))
-        self.assertIsNotNone(re.match(datetime_patt, state_obj.created_at))
-        self.assertIsNotNone(re.match(datetime_patt, state_obj.updated_at))
+        self.assertIsNotNone(re.match(datetime_patt,
+                                      str(state_obj.created_at)))
+        self.assertIsNotNone(re.match(datetime_patt,
+                                      str(state_obj.updated_at)))
 
 if __name__ == '__main__':
     unittest.main()

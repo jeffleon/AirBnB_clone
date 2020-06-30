@@ -118,7 +118,10 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print('** class doesn\'t exist **')
         else:
-            print('** class name missing **')
+            G_dic = list()
+            for value in storage.all().values():
+                G_dic.append(str(value))
+            print(G_dic)
 
     def do_update(self, args):
         """method that updates the specified object
