@@ -32,7 +32,6 @@ class TestBaseModel(unittest.TestCase):
         result_test_base_model = pep8_val.check_files([test_base_model_path])
         self.assertEqual(result_test_base_model.total_errors, 0)
 
-*********
     def test_new_object(self):
         """Tests when an instance is created"""
         base_obj = BaseModel()
@@ -40,10 +39,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(base_obj.id), str)
         self.assertEqual(type(base_obj.created_at), datetime.datetime)
         self.assertEqual(type(base_obj.updated_at), datetime.datetime)
-        pattern = '[0-9]*-[0-9]*-[0-9]*T[0-9]*:[0-9]*:[0-9]*.[0-9]*'
-        self.assertIsNotNone(re.match(pattern, base_obj.id))
-        pattern_t = '[0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*'
+        pattern = '[0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*'
+        pattern_t = '[0-9]*-[0-9]*-[0-9]*T[0-9]*:[0-9]*:[0-9]*.[0-9]*'
         datetime_patt = 'datetime.datetime(' + pattern_t + ')'
+        self.assertIsNotNone(re.match(pattern, base_obj.id))
         self.assertIsNotNone(re.match(datetime_patt, base_obj.created_at))
         self.assertIsNotNone(re.match(datetime_patt, base_obj.updated_at))
 
