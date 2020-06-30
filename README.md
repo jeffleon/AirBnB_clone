@@ -50,9 +50,11 @@ destroy <class_name> <id>:
 
     (hbnb) destroy Amenity 1234-1234-1234-1234-1234
 
-all <class_name>:
+all <class_name> or all:
 
     (hbnb) all Review
+    or
+    (hbnb) all
 
 update <class_name> <id> <attribute_name> "<attribute_value>":
 
