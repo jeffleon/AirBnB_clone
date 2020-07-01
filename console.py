@@ -189,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def show(self, arg, id_):
-        """
+        """show me what you got
         """
         i = False
         for key, value in storage.all().items():
@@ -221,7 +221,6 @@ class HBNBCommand(cmd.Cmd):
                 try:
                     metodo = new_list[1].split('(')[0]
                     id_ = ""
-                    print(len(sspc))
                     if new_list[1].find('{') != -1:
                         id_ = new_list[1].split('(')[1].replace(')',
                                                                 '')
@@ -230,7 +229,6 @@ class HBNBCommand(cmd.Cmd):
                         id_ = new_list[1].split('(')[1]
                         id_ = id_.replace(')', '').replace('"', '')
                         attrs = id_.split(', ')
-                    print('splitxcoma: {}'.format(attrs))
                 except:
                     pass
             for pa_match in list_patterns:
@@ -246,20 +244,17 @@ class HBNBCommand(cmd.Cmd):
                                 send = new_list[0] + " " + " ".join(attrs)
                                 dic_methods[metodo](send)
                             elif len(attrs) == 2:
-                                print('estoy haciendo bien el cast')
                                 try:
                                     attrs[0] = attrs[0].replace("'", "")
                                     attrs[0] = attrs[0].replace('"', '')
                                     dic_args = eval(attrs[1])
-                                    print(dic_args)
                                     for key, value in dic_args.items():
                                         send1 = new_list[0] + ' ' + attrs[0]
                                         send = '{} {} "{}"'.format(send1,
                                                                    key, value)
-                                        print(send)
                                         dic_methods[metodo](send)
                                 except:
-                                    print('entre a la excepcion')
+                                    print('command not found')
                             state = True
                     break
         if state is False:
