@@ -6,7 +6,6 @@ import json
 import re
 from models import base_model
 from models.base_model import BaseModel
-import datetime
 
 
 class TestBaseModel(unittest.TestCase):
@@ -38,11 +37,12 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(base_obj.id), str)
         self.assertEqual(type(base_obj.created_at), datetime.datetime)
         self.assertEqual(type(base_obj.updated_at), datetime.datetime)
-        pattern = '[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*'
-        datetime_patt = '[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*.[0-9]*'
+        pattern = '[0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*'
+        pattern_t = '[0-9]*-[0-9]*-[0-9]*T[0-9]*:[0-9]*:[0-9]*.[0-9]*'
+        datetime_patt = 'datetime.datetime(' + pattern_t + ')'
         self.assertIsNotNone(re.match(pattern, base_obj.id))
-        self.assertIsNotNone(re.match(datetime_patt, str(base_obj.created_at)))
-        self.assertIsNotNone(re.match(datetime_patt, str(base_obj.updated_at)))
+        self.assertIsNotNone(re.match(datetime_patt, base_obj.created_at))
+        self.assertIsNotNone(re.match(datetime_patt, base_obj.updated_at))
 
 if __name__ == '__main__':
     unittest.main()
