@@ -118,11 +118,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print('** class doesn\'t exist **')
         else:
-            G_dic = list()
-            new_var = dict(storage.all())
-            for value in new_var.values():
-                G_dic.append(str(value))
-            print(G_dic)
+            print('** class doesn\'t exist **')
 
     def do_update(self, args):
         """method that updates the specified object
