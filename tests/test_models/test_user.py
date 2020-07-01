@@ -41,5 +41,6 @@ class TestUser(unittest.TestCase):
         self.assertIsNotNone(re.match(datetime_patt, str(user_obj.created_at)))
         self.assertIsNotNone(re.match(datetime_patt, str(user_obj.updated_at)))
 
+
 if __name__ == '__main__':
     unittest.main()

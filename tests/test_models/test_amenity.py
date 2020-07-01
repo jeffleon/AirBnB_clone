@@ -42,5 +42,6 @@ class TestAmenity(unittest.TestCase):
         self.assertIsNotNone(re.match(datetime_patt,
                                       str(amenity_obj.updated_at)))
 
+
 if __name__ == '__main__':
     unittest.main()

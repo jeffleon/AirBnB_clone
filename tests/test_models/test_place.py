@@ -42,5 +42,6 @@ class TestPlace(unittest.TestCase):
         self.assertIsNotNone(re.match(datetime_patt,
                                       str(place_obj.updated_at)))
 
+
 if __name__ == '__main__':
     unittest.main()

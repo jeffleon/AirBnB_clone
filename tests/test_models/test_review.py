@@ -39,5 +39,6 @@ class TestReview(unittest.TestCase):
         self.assertIsNotNone(re.match(datetime_patt, review_obj.created_at))
         self.assertIsNotNone(re.match(datetime_patt, review_obj.updated_at))
 
+
 if __name__ == '__main__':
     unittest.main()

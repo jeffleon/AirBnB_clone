@@ -40,5 +40,6 @@ class TestCity(unittest.TestCase):
         self.assertIsNotNone(re.match(datetime_patt, str(city_obj.created_at)))
         self.assertIsNotNone(re.match(datetime_patt, str(city_obj.updated_at)))
 
+
 if __name__ == '__main__':
     unittest.main()
