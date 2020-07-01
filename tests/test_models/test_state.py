@@ -2,11 +2,10 @@
 """Unittest for State"""
 import unittest
 import pep8
-import json
-from models import state
-from models.state import State
 import datetime
 import re
+from models import state
+from models.state import State
 
 
 class TestState(unittest.TestCase):

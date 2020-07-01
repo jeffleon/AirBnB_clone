@@ -2,11 +2,10 @@
 """Unittest for Amenity"""
 import unittest
 import pep8
-import json
+import datetime
 import re
 from models import amenity
 from models.amenity import Amenity
-import datetime
 
 
 class TestAmenity(unittest.TestCase):

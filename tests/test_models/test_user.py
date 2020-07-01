@@ -2,11 +2,10 @@
 """Unittest for User"""
 import unittest
 import pep8
-import json
-from models import user
-from models.user import User
 import datetime
 import re
+from models import user
+from models.user import User
 
 
 class TestUser(unittest.TestCase):

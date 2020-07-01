@@ -2,11 +2,10 @@
 """Unittest for Review"""
 import unittest
 import pep8
-import json
-from models import review
-from models.review import Review
 import datetime
 import re
+from models import review
+from models.review import Review
 
 
 class TestReview(unittest.TestCase):

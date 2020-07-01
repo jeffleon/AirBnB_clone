@@ -2,11 +2,10 @@
 """Unittest for Place"""
 import unittest
 import pep8
-import json
-from models import place
-from models.place import Place
 import datetime
 import re
+from models import place
+from models.place import Place
 
 
 class TestPlace(unittest.TestCase):

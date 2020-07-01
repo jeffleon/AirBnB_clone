@@ -3,10 +3,9 @@
 
 import unittest
 import pep8
-import json
+import datetime
 from models.engine import file_storage
 from models.engine.file_storage import FileStorage
-import datetime
 
 
 class TestFileStorage(unittest.TestCase):
