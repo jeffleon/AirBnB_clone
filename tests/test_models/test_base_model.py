@@ -38,10 +38,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(base_obj.created_at), datetime.datetime)
         self.assertEqual(type(base_obj.updated_at), datetime.datetime)
         pattern = '[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*'
-        datetime_patt = '[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*.[0-9]*'
+        d_patt = '[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*.[0-9]*'
         self.assertIsNotNone(re.match(pattern, base_obj.id))
-        self.assertIsNotNone(re.match(datetime_patt, str(base_obj.created_at)))
-        self.assertIsNotNone(re.match(datetime_patt, str(base_obj.updated_at)))
+        self.assertIsNotNone(re.match(d_patt, str(base_obj.created_at)))
+        self.assertIsNotNone(re.match(d_patt, str(base_obj.updated_at)))
 
 if __name__ == '__main__':
     unittest.main()

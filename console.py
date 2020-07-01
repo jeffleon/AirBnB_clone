@@ -245,11 +245,5 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
-#    def precmd(self, line):
-#        os.isatty()
-#
-#    def postcmd(self, stop, line):
-#        pass
-#
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

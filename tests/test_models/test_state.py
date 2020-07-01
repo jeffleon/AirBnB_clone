@@ -34,12 +34,10 @@ class TestState(unittest.TestCase):
         self.assertEqual(type(state_obj.created_at), datetime.datetime)
         self.assertEqual(type(state_obj.updated_at), datetime.datetime)
         pattern = '[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*'
-        datetime_patt = '[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*.[0-9]*'
+        d_patt = '[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*.[0-9]*'
         self.assertIsNotNone(re.match(pattern, state_obj.id))
-        self.assertIsNotNone(re.match(datetime_patt,
-                                      str(state_obj.created_at)))
-        self.assertIsNotNone(re.match(datetime_patt,
-                                      str(state_obj.updated_at)))
+        self.assertIsNotNone(re.match(d_patt, str(state_obj.created_at)))
+        self.assertIsNotNone(re.match(d_patt, str(state_obj.updated_at)))
 
 if __name__ == '__main__':
     unittest.main()
