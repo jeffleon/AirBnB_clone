@@ -7,11 +7,6 @@ import pep8
 class TestCity(unittest.TestCase):
     """Class for testing with unit test the City class"""
 
-    def test_docstrings(self):
-        """Tests for dosctrings"""
-        self.assertGreater(len(city.__doc__), 1)
-        self.assertGreater(len(City.__doc__), 1)
-
     def test_pep8(self):
         """ Test for PEP8 """
         pep8_val = pep8.StyleGuide(quiet=True)
