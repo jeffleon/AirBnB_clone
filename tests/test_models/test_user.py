@@ -5,6 +5,8 @@ import pep8
 import json
 from models import user
 from models.user import User
+import datetime
+import re
 
 
 class TestUser(unittest.TestCase):
@@ -32,16 +34,16 @@ class TestUser(unittest.TestCase):
     def test_new_object(self):
         """Tests when an instance is created"""
         user_obj = User()
+        print(user_obj.__dict__)
         self.assertIsInstance(user_obj, User)
         self.assertEqual(type(user_obj.id), str)
         self.assertEqual(type(user_obj.created_at), datetime.datetime)
         self.assertEqual(type(user_obj.updated_at), datetime.datetime)
-        pattern = '[0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*'
-        pattern_t = '[0-9]*-[0-9]*-[0-9]*T[0-9]*:[0-9]*:[0-9]*.[0-9]*'
-        datetime_patt = 'datetime.datetime(' + pattern_t + ')'
+        pattern = '[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*'
+        datetime_patt = '[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*.[0-9]*'
         self.assertIsNotNone(re.match(pattern, user_obj.id))
-        self.assertIsNotNone(re.match(datetime_patt, user_obj.created_at))
-        self.assertIsNotNone(re.match(datetime_patt, user_obj.updated_at))
+        self.assertIsNotNone(re.match(datetime_patt, str(user_obj.created_at)))
+        self.assertIsNotNone(re.match(datetime_patt, str(user_obj.updated_at)))
 
 if __name__ == '__main__':
     unittest.main()

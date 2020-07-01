@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 """Unittest for FileStorage"""
+
 import unittest
 import pep8
 import json
 from models.engine import file_storage
+from models.engine.file_storage import FileStorage
+import datetime
 
 
 class TestFileStorage(unittest.TestCase):
@@ -21,26 +24,13 @@ class TestFileStorage(unittest.TestCase):
     def test_pep8(self):
         """ Test for PEP8 """
         pep8_val = pep8.StyleGuide(quiet=True)
-        file_storage_path = 'models/engine/file_storage.py'
-        result_file_storage = pep8_val.check_files([file_storage_path])
-        self.assertEqual(result_file_storage.total_errors, 0)
-        t_file_st_path = 'tests/test_models/test_engine/test_file_storage.py'
-        result_test_file_storage = pep8_val.check_files([t_file_st_path])
-        self.assertEqual(result_test_file_storage.total_errors, 0)
+        base_model_path = 'models/engine/file_storage.py'
+        result_base_model = pep8_val.check_files([base_model_path])
+        self.assertEqual(result_base_model.total_errors, 0)
+        t_model_path = 'tests/test_models/test_engine/test_file_storage.py'
+        result_test_base_model = pep8_val.check_files([t_model_path])
+        self.assertEqual(result_test_base_model.total_errors, 0)
 
-    def test_new_object(self):
-        """Tests when an instance is created"""
-        file_s_obj = FileStorage()
-        self.assertIsInstance(file_s_obj, FileStorage)
-        self.assertEqual(type(file_s_obj.id), str)
-        self.assertEqual(type(file_s_obj.created_at), datetime.datetime)
-        self.assertEqual(type(file_s_obj.updated_at), datetime.datetime)
-        pattern = '[0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*, [0-9]*'
-        pattern_t = '[0-9]*-[0-9]*-[0-9]*T[0-9]*:[0-9]*:[0-9]*.[0-9]*'
-        datetime_patt = 'datetime.datetime(' + pattern_t + ')'
-        self.assertIsNotNone(re.match(pattern, file_s_obj.id))
-        self.assertIsNotNone(re.match(datetime_patt, file_s_obj.created_at))
-        self.assertIsNotNone(re.match(datetime_patt, file_s_obj.updated_at))
 
 if __name__ == '__main__':
     unittest.main()
