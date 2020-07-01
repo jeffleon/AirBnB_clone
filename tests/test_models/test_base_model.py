@@ -2,6 +2,7 @@
 """Unittest for BaseModel"""
 import unittest
 import pep8
+from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
@@ -9,7 +10,6 @@ class TestBaseModel(unittest.TestCase):
 
     def test_docstrings(self):
         """Tests for dosctrings"""
-        self.assertGreater(len(base_model.__doc__), 1)
         self.assertGreater(len(BaseModel.__doc__), 1)
         self.assertGreater(len(BaseModel.__init__.__doc__), 1)
         self.assertGreater(len(BaseModel.__str__.__doc__), 1)
