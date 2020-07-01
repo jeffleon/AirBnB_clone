@@ -16,10 +16,6 @@ class TestUser(unittest.TestCase):
         """Tests for dosctrings"""
         self.assertGreater(len(user.__doc__), 1)
         self.assertGreater(len(User.__doc__), 1)
-        self.assertGreater(len(User.__init__.__doc__), 1)
-        self.assertGreater(len(User.__str__.__doc__), 1)
-        self.assertGreater(len(User.save.__doc__), 1)
-        self.assertGreater(len(User.to_dict.__doc__), 1)
 
     def test_pep8(self):
         """ Test for PEP8 """
