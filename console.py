@@ -224,12 +224,11 @@ class HBNBCommand(cmd.Cmd):
                     print(len(sspc))
                     if new_list[1].find('{') != -1:
                         id_ = new_list[1].split('(')[1].replace(')',
-                                                            '')
+                                                                '')
                         attrs = id_.split(', ', 1)
                     else:
-                        id_ = new_list[1].split('(')[1].replace(')',
-                                                            '').replace('"',
-                                                                        '')
+                        id_ = new_list[1].split('(')[1]
+                        id_ = id_.replace(')', '').replace('"', '')
                         attrs = id_.split(', ')
                     print('splitxcoma: {}'.format(attrs))
                 except:
@@ -253,7 +252,7 @@ class HBNBCommand(cmd.Cmd):
                                     attrs[0] = attrs[0].replace('"', '')
                                     dic_args = eval(attrs[1])
                                     print(dic_args)
-                                    for key,value in dic_args.items():
+                                    for key, value in dic_args.items():
                                         send1 = new_list[0] + ' ' + attrs[0]
                                         send = '{} {} "{}"'.format(send1,
                                                                    key, value)
@@ -271,11 +270,6 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
-#    def precmd(self, line):
-#        os.isatty()
-#
-#    def postcmd(self, stop, line):
-#        pass
-#
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
