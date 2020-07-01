@@ -1,6 +1,6 @@
 # Project: AirBnB clone - The console
 
-Console for the AirBnB clone.
+onsole for the AirBnB clone.
 This repository contains the files for AirBnB clone - the console project.
 
 
