@@ -2,11 +2,6 @@
 """Unittest for City"""
 import unittest
 import pep8
-import json
-from models import city
-from models.city import City
-import datetime
-import re
 
 
 class TestCity(unittest.TestCase):
@@ -26,19 +21,6 @@ class TestCity(unittest.TestCase):
         test_city_path = 'tests/test_models/test_city.py'
         result_test_city = pep8_val.check_files([test_city_path])
         self.assertEqual(result_test_city.total_errors, 0)
-
-    def test_new_object(self):
-        """Tests when an instance is created"""
-        city_obj = City()
-        self.assertIsInstance(city_obj, City)
-        self.assertEqual(type(city_obj.id), str)
-        self.assertEqual(type(city_obj.created_at), datetime.datetime)
-        self.assertEqual(type(city_obj.updated_at), datetime.datetime)
-        pattern = '[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*'
-        datetime_patt = '[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*.[0-9]*'
-        self.assertIsNotNone(re.match(pattern, city_obj.id))
-        self.assertIsNotNone(re.match(datetime_patt, str(city_obj.created_at)))
-        self.assertIsNotNone(re.match(datetime_patt, str(city_obj.updated_at)))
 
 
 if __name__ == '__main__':
