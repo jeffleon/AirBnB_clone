@@ -189,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def show(self, arg, id_):
-        """show me what you got
+        """
         """
         i = False
         for key, value in storage.all().items():
@@ -209,26 +209,18 @@ class HBNBCommand(cmd.Cmd):
         list_patterns = ['(.+)\.all\(\)$', '(.+)\.count\(\)$',
                          '(.+)\.show\(\"(.+)\"\)$',
                          '(.+)\.destroy\(\"(.+)\"\)$',
-                         '(.+)\.update\(\"(.+)\", \"(.+)\", \"(.+)\"\)$',
-                         '(.+)\.update\(\"(.+)\", \{(.+)\}\)$']
+                         '(.+)\.update\(\"(.+)\", \"(.+)\", \"(.+)\"\)$']
         state = False
         sspc = arg.split()
-        attrs = ""
-        if len(sspc) == 1 or (arg.find('update') != -1 and
-                              (len(sspc) == 3 or arg.find('{') != -1)):
+        if len(sspc) == 1 or (arg.find('update') != -1 and len(sspc) == 3):
             new_list = arg.split('.', 1)
             if arg.find('(') != -1 and arg.find(')') != -1:
                 try:
                     metodo = new_list[1].split('(')[0]
-                    id_ = ""
-                    if new_list[1].find('{') != -1:
-                        id_ = new_list[1].split('(')[1].replace(')',
-                                                                '')
-                        attrs = id_.split(', ', 1)
-                    else:
-                        id_ = new_list[1].split('(')[1]
-                        id_ = id_.replace(')', '').replace('"', '')
-                        attrs = id_.split(', ')
+                    id_ = new_list[1].split('(')[1].replace(')',
+                                                            '').replace('"',
+                                                                        '')
+                    attrs = id_.split(', ')
                 except:
                     pass
             for pa_match in list_patterns:
@@ -239,22 +231,10 @@ class HBNBCommand(cmd.Cmd):
                                 dic_methods[metodo]('{}'.format(new_list[0]))
                             elif len(attrs) == 1:
                                 dic_methods[metodo](new_list[0] + ' ' + id_)
-                            elif len(attrs) == 3:
+                            else:
                                 attrs[2] = '"' + attrs[2] + '"'
                                 send = new_list[0] + " " + " ".join(attrs)
                                 dic_methods[metodo](send)
-                            elif len(attrs) == 2:
-                                try:
-                                    attrs[0] = attrs[0].replace("'", "")
-                                    attrs[0] = attrs[0].replace('"', '')
-                                    dic_args = eval(attrs[1])
-                                    for key, value in dic_args.items():
-                                        send1 = new_list[0] + ' ' + attrs[0]
-                                        send = '{} {} "{}"'.format(send1,
-                                                                   key, value)
-                                        dic_methods[metodo](send)
-                                except:
-                                    print('command not found')
                             state = True
                     break
         if state is False:
@@ -265,6 +245,11 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
-
+#    def precmd(self, line):
+#        os.isatty()
+#
+#    def postcmd(self, stop, line):
+#        pass
+#
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
