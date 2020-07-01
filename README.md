@@ -30,7 +30,7 @@ To use the console you have to execute it first (check previous tip: how to star
     create  -	Creates a new instance of a class
     show    -	Print the string representation of an instance based on the class name
     destroy -	Deletes an instance based on the class name and id
-    all	    -	Print all string representation of all instances based or not on the class name
+    all     -	Print all string representation of all instances based or not on the class name
     update  -	Updates an instance based on the class name and id by adding or updating attribute
     help    -	Shows the help entry
     quit    -	Exit the console
