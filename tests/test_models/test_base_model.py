@@ -2,10 +2,8 @@
 """Unittest for BaseModel"""
 import unittest
 import pep8
-import re
 from models import base_model
 from models.base_model import BaseModel
-import datetime
 
 
 class TestBaseModel(unittest.TestCase):
