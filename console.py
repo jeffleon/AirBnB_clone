@@ -119,7 +119,8 @@ class HBNBCommand(cmd.Cmd):
                     print('** class doesn\'t exist **')
         else:
             G_dic = list()
-            for value in storage.all().values():
+            new_var = dict(storage.all())
+            for value in new_var.values():
                 G_dic.append(str(value))
             print(G_dic)
 
