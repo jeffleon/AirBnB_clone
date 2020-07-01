@@ -9,7 +9,7 @@ This repository contains the files for AirBnB clone - the console project.
 The console project is the first step towards building the full web application project: The AirBnB clone.
 The objective of this project is to make our console program. The program is limited to a specific use-case, having the following functionalities:
 
-    Create a new object (objecs: BaseModel, User, Amenity, City, Place, Review, State)
+    Create a new object (objects: BaseModel, User, Amenity, City, Place, Review, State)
     Retrieve an object from a file, a json file, file.json is used
     Do operations on objects (count, show, destroy, all, update)
     Update attributes of an object
@@ -27,14 +27,13 @@ To start the console execute the 'console.py' file, use:
 
 To use the console you have to execute it first (check previous tip: how to start it) then in the console (check for the '(hbnb)' prompt) use the following commands:
 
-    create  -	   Creates a new instance of a class
-    show    -	   Print the string representation of an instance based on the class name
-    destroy -	   Deletes an instance based on the class name and id
-    all	        -  Print all string representation of all instances based or not on the class name
+    create  -	Creates a new instance of a class
+    show    -	Print the string representation of an instance based on the class name
+    destroy -	Deletes an instance based on the class name and id
+    all	    -   Print all string representation of all instances based or not on the class name
     update  -	Updates an instance based on the class name and id by adding or updating attribute
     help    -	Shows the help entry
     quit    -	Exit the console
-
 
 # Examples
 
