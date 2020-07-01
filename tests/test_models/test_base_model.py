@@ -13,10 +13,6 @@ class TestBaseModel(unittest.TestCase):
         """Tests for dosctrings"""
         self.assertGreater(len(base_model.__doc__), 1)
         self.assertGreater(len(BaseModel.__doc__), 1)
-        self.assertGreater(len(BaseModel.__init__.__doc__), 1)
-        self.assertGreater(len(BaseModel.__str__.__doc__), 1)
-        self.assertGreater(len(BaseModel.save.__doc__), 1)
-        self.assertGreater(len(BaseModel.to_dict.__doc__), 1)
 
     def test_pep8(self):
         """ Test for PEP8 """
