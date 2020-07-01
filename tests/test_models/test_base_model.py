@@ -31,19 +31,6 @@ class TestBaseModel(unittest.TestCase):
         result_test_base_model = pep8_val.check_files([test_base_model_path])
         self.assertEqual(result_test_base_model.total_errors, 0)
 
-    def test_new_object(self):
-        """Tests when an instance is created"""
-        base_obj = BaseModel()
-        self.assertIsInstance(base_obj, BaseModel)
-        self.assertEqual(type(base_obj.id), str)
-        self.assertEqual(type(base_obj.created_at), datetime.datetime)
-        self.assertEqual(type(base_obj.updated_at), datetime.datetime)
-        pattern = '[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*'
-        datetime_patt = '[0-9]*-[0-9]*-[0-9]* [0-9]*:[0-9]*:[0-9]*.[0-9]*'
-        self.assertIsNotNone(re.match(pattern, base_obj.id))
-        self.assertIsNotNone(re.match(datetime_patt, str(base_obj.created_at)))
-        self.assertIsNotNone(re.match(datetime_patt, str(base_obj.updated_at)))
-
 
 if __name__ == '__main__':
     unittest.main()
